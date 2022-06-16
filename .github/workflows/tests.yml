@@ -30,3 +30,4 @@ jobs:
       - name: run tests
         run: |
           pipenv run tests
+        working-directory: ./data_structures
