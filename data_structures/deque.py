@@ -23,4 +23,3 @@ class Deque:
 
     def remove_from_front(self):
         return self.queue.pop(0)
-
