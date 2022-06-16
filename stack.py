@@ -16,12 +16,12 @@ class Stack:
 
     def pop(self):
         if self.is_empty():
-            return "Stack is empty"
+            return None
         return self.stack.pop()
 
     def peek(self):
         if self.is_empty():
-            return "Stack is empty"
+            return None
         return self.stack[-1]
 
     def get_stack(self):
