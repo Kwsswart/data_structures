@@ -7,32 +7,28 @@ from abc import ABC, abstractmethod
 class Queue(ABC):
 
     @abstractmethod
-    def enqueue(self):
+    def enqueue(self, item):
         """
         Insert element into queue.
         """
-        pass
 
     @abstractmethod
     def dequeue(self):
         """
         Remove element from queue.
         """
-        pass
 
     @abstractmethod
     def is_empty(self):
         """
         Check if queue is empty.
         """
-        pass
 
     @abstractmethod
     def peek(self):
         """
         Return value of next value in queue without removing it.
         """
-        pass
 
 
 class SimpleQueue(Queue):
@@ -49,7 +45,7 @@ class SimpleQueue(Queue):
         return self.queue.pop(0)
 
     def is_empty(self):
-        return self.queue == []
+        return not self.queue
 
     def peek(self):
         if self.is_empty():
@@ -73,12 +69,11 @@ class CircularQueue(Queue):
 
     def increase_front_index(self):
         """
-        Circularly increase front index by 1, if it reaches the end, then the next value would be the start of the queue.
+        Circularly increase front index by 1, if it reaches the end, then the next value would be the start of the queue
         """
         return (self.front + 1) % self.queue_size
 
     def enqueue(self, item):
-        pass
         if self.is_full():
             print("Queue is full.")
         elif self.front == -1:
@@ -91,15 +86,15 @@ class CircularQueue(Queue):
     def dequeue(self):
         if self.is_empty():
             print("Queue is empty.")
-        elif self.front == self.rear:
+            return None
+        if self.front == self.rear:
             # return the singular value and reset it to an empty queue
             value = self.queue[self.front]
             self.front, self.rear = -1, -1
             return value
-        else:
-            value = self.queue[self.front]
-            self.front = self.increase_front_index()
-            return value
+        value = self.queue[self.front]
+        self.front = self.increase_front_index()
+        return value
 
     def is_full(self):
         return self.increase_rear_index() == self.front
