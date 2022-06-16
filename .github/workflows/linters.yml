@@ -1,0 +1,36 @@
+name: linters
+on:
+  push:
+    branches:
+      - '**'
+
+jobs:
+  linters:
+    timeout-minutes: 3
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v3
+
+      - name: set up python 3.10
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+          cache: 'pipenv'
+
+      - name: install pipenv
+        run: |
+          pip install pipenv
+
+      - name: Install dependencies
+        run: |
+          pipenv install --deploy --dev
+          pipenv clean
+
+      - name: run pylint
+        run: |
+          pipenv run pylint data_structures
+
+      - name: run flake8
+        run: |
+          pipenv run flake8 data_structures
