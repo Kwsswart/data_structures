@@ -7,5 +7,6 @@ exclude =
     .git,
     __pycache__
 
-
+per-file-ignores =
+    data_structures/__init__.py: F401
 
