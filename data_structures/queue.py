@@ -79,7 +79,7 @@ class CircularQueue(Queue):
 
     def enqueue(self, item):
         if self.is_full():
-            print("Queue is full.")
+            return None
         elif self.front == -1:
             self.front, self.rear = 0, 0
             self.queue[self.rear] = item
@@ -89,7 +89,6 @@ class CircularQueue(Queue):
 
     def dequeue(self):
         if self.is_empty():
-            print("Queue is empty.")
             return None
         if self.front == self.rear:
             # return the singular value and reset it to an empty queue
