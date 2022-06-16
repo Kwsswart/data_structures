@@ -79,8 +79,9 @@ class CircularQueue(Queue):
 
     def enqueue(self, item):
         if self.is_full():
-            return None
-        elif self.front == -1:
+            print("Unable to add item: Queue is full.")
+
+        if self.front == -1:
             self.front, self.rear = 0, 0
             self.queue[self.rear] = item
         else:
@@ -90,11 +91,13 @@ class CircularQueue(Queue):
     def dequeue(self):
         if self.is_empty():
             return None
+
         if self.front == self.rear:
             # return the singular value and reset it to an empty queue
             value = self.queue[self.front]
             self.front, self.rear = -1, -1
             return value
+
         value = self.queue[self.front]
         self.front = self.increase_front_index()
         return value
